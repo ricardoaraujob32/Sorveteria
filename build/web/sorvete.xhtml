@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Gestão de Sorvetes</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputScript library="js" name="bootstrap.min.js" target="head"/>
+        <h:outputScript library="js" name="jquery-3.3.1.min.js"/>
+    </h:head>
+    <h:body>
+        <h:messages globalOnly="true" showDetail="false" tooltip="true"></h:messages>
+        <div class="container">
+            <h2>Gestão de Sorvetes</h2>            
+            <h:form id="formSorvete">
+                <div class="form-group">
+                    <h:outputLabel for="txtId">ID: </h:outputLabel>
+                    <h:outputText styleClass="form-control" id="txtId" value="#{sorveteControllerMB.sorveteAtual.id}"></h:outputText>
+                </div>
+                <div class="form-group">
+                    <img src="#{sorveteControllerMB.sorveteAtual.imagem}" width="150" height="100" alt="Imagem do produto"/>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="txtSabor">Sabor: </h:outputLabel>
+                    <div class="form-group">
+                        <h:inputText id="txtSabor" styleClass="form-control" value="#{sorveteControllerMB.sorveteAtual.sabor}"/>
+                        <h:message for="txtSabor" showSummary="true" showDetail="false" tooltip="true"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="txtPreco">Preço: </h:outputLabel>
+                    <div class="form-group">
+                        <h:inputText id="txtPreco" styleClass="form-control" value="#{sorveteControllerMB.sorveteAtual.preco}"/>
+                        <h:message for="txtPreco" showSummary="true" showDetail="false" tooltip="true"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="txtTipo">Tipo de sorvete: </h:outputLabel>
+                    <div class="form-group">
+                        <h:selectOneMenu id="txtTipo" styleClass="form-control">
+                            <f:selectItem itemLabel="Massa 2Kg" itemValue="massa2k" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="Massa 1Kg" itemValue="massa1k"/>
+                            <f:selectItem itemLabel="Massa 250g" itemValue="massa250"/>
+                            <f:selectItem itemLabel="Picolé" itemValue="picole"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <h:selectOneRadio></h:selectOneRadio>
+                        
+                    <!--    <input class="form-check-input" type="radio" name="txtCobertura" id="txtCobertura" value="choc" <%="choc".equals(sorveteAtual.getCobertura()) ? "checked" : ""%>/>
+                            <label class="form-check-label" for="txtCobertura">Chocolate</label> -->
+                    </div>
+                </div>
+            </h:form>
+        </div>
+
+        
+    </h:body>
+</html>
+
