@@ -4,60 +4,131 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Gestão de Sorvetes</title>
         <h:outputStylesheet library="css" name="bootstrap.min.css"/>
         <h:outputScript library="js" name="bootstrap.min.js" target="head"/>
         <h:outputScript library="js" name="jquery-3.3.1.min.js"/>
+        <script>
+            function remover( id ) {
+			if (confirm("Remove o sorvete com id " + id)) {
+				$('#formSorvete').empty();
+				$('#formSorvete').append('<input type="hidden" name="txtId" value="' + id + '"/>');
+				$('#formSorvete').append('<input type="hidden" name="cmd" value="remover"/>');
+				$('#formSorvete').submit();
+			}
+            }
+            function editar( id ) {
+			$('#formSorvete').empty();
+			$('#formSorvete').append('<input type="hidden" name="txtId" value="' + id + '"/>');
+			$('#formSorvete').append('<input type="hidden" name="cmd" value="editar"/>');
+			$('#formSorvete').submit();
+		}		
+        </script>
     </h:head>
     <h:body>
         <h:messages globalOnly="true" showDetail="false" tooltip="true"></h:messages>
-        <div class="container">
+        <h:panelGroup styleClass="container">
             <h2>Gestão de Sorvetes</h2>            
             <h:form id="formSorvete">
-                <div class="form-group">
+                <h:panelGroup styleClass="form-group">
                     <h:outputLabel for="txtId">ID: </h:outputLabel>
                     <h:outputText styleClass="form-control" id="txtId" value="#{sorveteControllerMB.sorveteAtual.id}"></h:outputText>
-                </div>
-                <div class="form-group">
+                </h:panelGroup>
+                <h:panelGroup styleClass="form-group">
                     <img src="#{sorveteControllerMB.sorveteAtual.imagem}" width="150" height="100" alt="Imagem do produto"/>
-                </div>
-                <div class="form-group">
+                </h:panelGroup>
+                <h:panelGroup styleClass="form-group">
                     <h:outputLabel for="txtSabor">Sabor: </h:outputLabel>
-                    <div class="form-group">
+                    <h:panelGroup styleClass="form-group">
                         <h:inputText id="txtSabor" styleClass="form-control" value="#{sorveteControllerMB.sorveteAtual.sabor}"/>
                         <h:message for="txtSabor" showSummary="true" showDetail="false" tooltip="true"/>
-                    </div>
-                </div>
-                <div class="form-group">
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup styleClass="form-group">
                     <h:outputLabel for="txtPreco">Preço: </h:outputLabel>
-                    <div class="form-group">
+                    <h:panelGroup styleClass="form-group">
                         <h:inputText id="txtPreco" styleClass="form-control" value="#{sorveteControllerMB.sorveteAtual.preco}"/>
                         <h:message for="txtPreco" showSummary="true" showDetail="false" tooltip="true"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel for="txtTipo">Tipo de sorvete: </h:outputLabel>
-                    <div class="form-group">
-                        <h:selectOneMenu id="txtTipo" styleClass="form-control">
-                            <f:selectItem itemLabel="Massa 2Kg" itemValue="massa2k" noSelectionOption="true"/>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup styleClass="form-group">
+                        <h:outputLabel for="txtTipo">Tipo de sorvete: </h:outputLabel>
+                        <h:panelGroup styleClass="form-group">
+                        <h:selectOneMenu id="txtTipo" styleClass="form-control" value="#{sorveteControllerMB.sorveteAtual.tipo}">
+                            <f:selectItem itemLabel="Massa 2Kg" itemValue="massa2k"/>
                             <f:selectItem itemLabel="Massa 1Kg" itemValue="massa1k"/>
                             <f:selectItem itemLabel="Massa 250g" itemValue="massa250"/>
                             <f:selectItem itemLabel="Picolé" itemValue="picole"/>
                         </h:selectOneMenu>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <h:selectOneRadio></h:selectOneRadio>
-                        
-                    <!--    <input class="form-check-input" type="radio" name="txtCobertura" id="txtCobertura" value="choc" <%="choc".equals(sorveteAtual.getCobertura()) ? "checked" : ""%>/>
-                            <label class="form-check-label" for="txtCobertura">Chocolate</label> -->
-                    </div>
-                </div>
+                    </h:panelGroup>
+                    <h:panelGroup styleClass="form-check form-check-inline">
+                        <h:selectOneRadio id="txtCobertura" value="#{sorveteControllerMB.sorveteAtual.cobertura}"
+                                          layout="lineDirection">
+                            <f:selectItem class="form-check-input" itemLabel="Chocolate" itemValue="choc" />
+                            <f:selectItem class="form-check-input" itemLabel="Morango" itemValue="mor" />
+                            <f:selectItem class="form-check-input" itemLabel="Caramelo" itemValue="car" />
+                        </h:selectOneRadio>
+                    </h:panelGroup>
+                        <h:panelGroup styleClass="form-group">
+                        <h:outputLabel for="txtImagem">Imagem</h:outputLabel>
+                        <h:inputText id="txtImagem" styleClass="form-control" value="#{sorveteControllerMB.sorveteAtual.imagem}"/>    
+                    </h:panelGroup>
+                    <h:panelGroup styleClass="form-group">
+                        <c:if test="#{sorveteControllerMB.sorveteAtual.id == 0}">
+                            <h:commandButton styleClass="btn btn-primary" action="#{sorveteControllerMB.adicionar}">Adicionar</h:commandButton>
+                        </c:if>
+                        <c:otherwise>
+                            <h:commandButton styleClass="btn btn-primary" action="#{sorveteControllerMB.salvar}">Salvar</h:commandButton>
+                        </c:otherwise>
+                        <h:commandButton styleClass="btn btn-primary" action="#{sorveteControllerMB.pesquisarPorSabor}">Pesquisar</h:commandButton>
+                    </h:panelGroup>
+                </h:panelGroup>
+                
+                <c:if test="#{sorveteControllerMB.listaSorvetes.size > 0}">
+                    <h:panelGroup styleClass="container">
+                        <h:dataTable styleClass="table table-striped" value="#{sorveteControllerMB.listaSorvetes}" var="s" border="1">
+                            <h:column>
+                                <f:facet name="header">Id</f:facet>
+                                #{s.id}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Sabor</f:facet>
+                                #{s.sabor}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Tipo</f:facet>
+                                #{s.tipo}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Preço</f:facet>
+                                #{s.preco}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Cobertura</f:facet>
+                                #{s.cobertura}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Imagem</f:facet>
+                                <h:graphicImage value="#{s.imagem}"></h:graphicImage>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Ação</f:facet>
+                                <h:panelGroup styleClass="form-group">
+                                    <h:commandButton styleClass="btn btn-primary" onclick="remover(#{s.id})">Remover</h:commandButton>
+                                    <h:commandButton styleClass="btn btn-primary" onclick="editar(#{s.id})">Editar</h:commandButton>
+                                </h:panelGroup>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </c:if>
             </h:form>
-        </div>
-
-        
+        </h:panelGroup>
+        <script>
+            $('#txtTipo').val("#{s.tipo}");
+        </script>            
     </h:body>
 </html>
 
