@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package com.wordpress.ricardoanalistadesistemas.sorveteria.dao;
 
 import java.util.List;
-import model.Sorvete;
+import com.wordpress.ricardoanalistadesistemas.sorveteria.model.Sorvete;
 
 /**
  *

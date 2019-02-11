@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package com.wordpress.ricardoanalistadesistemas.sorveteria.controller;
 
-import dao.GenericDAOException;
-import dao.SorveteDAO;
-import dao.SorveteDAOImpl;
+import com.wordpress.ricardoanalistadesistemas.sorveteria.dao.GenericDAOException;
+import com.wordpress.ricardoanalistadesistemas.sorveteria.dao.SorveteDAO;
+import com.wordpress.ricardoanalistadesistemas.sorveteria.dao.SorveteDAOImpl;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Sorvete;
+import com.wordpress.ricardoanalistadesistemas.sorveteria.model.Sorvete;
 
 /**
  *

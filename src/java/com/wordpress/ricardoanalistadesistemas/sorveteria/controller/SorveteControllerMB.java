@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package com.wordpress.ricardoanalistadesistemas.sorveteria.controller;
 
-import dao.GenericDAOException;
-import dao.SorveteDAO;
-import dao.SorveteDAOImpl;
+import com.wordpress.ricardoanalistadesistemas.sorveteria.dao.GenericDAOException;
+import com.wordpress.ricardoanalistadesistemas.sorveteria.dao.SorveteDAO;
+import com.wordpress.ricardoanalistadesistemas.sorveteria.dao.SorveteDAOImpl;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import model.Sorvete;
+import com.wordpress.ricardoanalistadesistemas.sorveteria.model.Sorvete;
 
 /**
  *
